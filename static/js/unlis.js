@@ -68,12 +68,15 @@ export const $uniRoute = function $pageRoute(url, state = 'navigateTo', func = '
  */
 export const $uniRequest = async function uniRequest(url, pram, callback) {
 	let [error, res] = await uni.request({
-		url: 'http://localhost:3000' + url,
+		url: 'http://127.0.0.1:7001' + url,
 		method: pram.method || 'GET',
-		header: pram.header || {'content-type': 'application/json'},
+		header: pram.header || { 
+			'content-type': 'application/json',
+			'Authorization': 'Bearer ' + uni.getStorageSync('token'),
+		},
 		data: pram.data
 	})
-	
+	// 判断是否返回-1 如果返回-1, 进行授权获取token, 存储token在本地缓存 否则返回回调函数
 	callback(res.data, error);
 }
 

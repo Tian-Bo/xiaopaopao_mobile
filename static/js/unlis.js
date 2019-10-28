@@ -67,8 +67,9 @@ export const $uniRoute = function $pageRoute(url, state = 'navigateTo', func = '
  * @return {Function}
  */
 export const $uniRequest = async function uniRequest(url, pram, callback) {
+	let http = 'http://apis.xiaopaopao.cn:7001'
 	let [error, res] = await uni.request({
-		url: 'http://127.0.0.1:7001' + url,
+		url: http + url,
 		method: pram.method || 'GET',
 		header: pram.header || { 
 			'content-type': 'application/json',
